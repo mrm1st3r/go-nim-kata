@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"fmt"
 	"encoding/json"
-	"nim/game"
+	"github.com/mrm1st3r/go-nim-kata/game"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/satori/go.uuid"
 	"errors"
-	"nim/game"
+	"github.com/mrm1st3r/go-nim-kata/game"
 )
 
 var conn *redis.Client
