@@ -19,7 +19,7 @@ func init() {
 	})
 }
 
-// Persist a game to redis
+// PersistGame() persists a game to redis
 func PersistGame(game game.State) {
 	gameMap := make(map[string]interface{})
 	gameMap["matchesLeft"] = game.MatchesLeft
@@ -28,7 +28,7 @@ func PersistGame(game game.State) {
 	conn.HMSet(dbKey(game.ID), gameMap)
 }
 
-// Load a previously persisted game from redis
+// LoadGame loads a previously persisted game from redis
 func LoadGame(gameId interface{}) (game.State, error) {
 	gameUuid, _ := uuid.FromString(gameId.(string))
 
