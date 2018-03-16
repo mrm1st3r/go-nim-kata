@@ -1,26 +1,26 @@
 package game
 
 import (
-	"testing"
 	"github.com/satori/go.uuid"
+	"testing"
 )
 
 type test struct {
-	MatchesLeft int
+	MatchesLeft  int
 	ExpectedTake int
 }
 
 var tests = []test{
-	test{1, 1},
-	test{2, 1},
-	test{3, 2},
-	test{4, 3},
-	test{6, 1},
-	test{7, 2},
+	{1, 1},
+	{2, 1},
+	{3, 2},
+	{4, 3},
+	{6, 1},
+	{7, 2},
 }
 
 func TestComputerMove(t *testing.T) {
-	for _,data := range tests {
+	for _, data := range tests {
 		actual := computerMove(State{uuid.UUID{}, data.MatchesLeft, ""})
 		if actual != data.ExpectedTake {
 			t.Errorf("For left matches %d expected %d, got %d", data.MatchesLeft, data.ExpectedTake, actual)

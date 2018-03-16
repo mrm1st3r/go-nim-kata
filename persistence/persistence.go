@@ -1,21 +1,21 @@
 package persistence
 
 import (
-	"github.com/go-redis/redis"
-	"fmt"
-	"github.com/satori/go.uuid"
 	"errors"
+	"fmt"
+	"github.com/go-redis/redis"
 	"github.com/mrm1st3r/go-nim-kata/game"
+	"github.com/satori/go.uuid"
 	"strconv"
 )
 
 var conn *redis.Client
 
 func init() {
-	conn = redis.NewClient(&redis.Options {
-		Addr: "localhost:6379",
+	conn = redis.NewClient(&redis.Options{
+		Addr:     "localhost:6379",
 		Password: "",
-		DB: 0,
+		DB:       0,
 	})
 }
 

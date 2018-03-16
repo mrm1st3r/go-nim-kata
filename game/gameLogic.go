@@ -1,13 +1,13 @@
 package game
 
 import (
-	"github.com/satori/go.uuid"
 	"errors"
+	"github.com/satori/go.uuid"
 )
 
-const STARTING_MATCHES = 13
-const MIN_TAKES = 1
-const MAX_TAKES = 3
+const startingMatches = 13
+const minTakes = 1
+const maxTakes = 3
 
 type State struct {
 	ID          uuid.UUID
@@ -18,14 +18,14 @@ type State struct {
 func New() State {
 	return State{
 		uuid.Must(uuid.NewV4()),
-		STARTING_MATCHES,
+		startingMatches,
 		"",
 	}
 }
 
 func Play(game State, takeMatches int) (State, error) {
-	if takeMatches < MIN_TAKES || takeMatches > MAX_TAKES || takeMatches > game.MatchesLeft {
-		return State{}, errors.New("Invalid move")
+	if takeMatches < minTakes || takeMatches > maxTakes || takeMatches > game.MatchesLeft {
+		return State{}, errors.New("invalid move")
 	}
 
 	game.MatchesLeft -= takeMatches

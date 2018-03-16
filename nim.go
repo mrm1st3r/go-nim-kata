@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/buaazp/fasthttprouter"
-	"github.com/valyala/fasthttp"
-	"strconv"
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"github.com/buaazp/fasthttprouter"
 	"github.com/mrm1st3r/go-nim-kata/game"
 	"github.com/mrm1st3r/go-nim-kata/persistence"
+	"github.com/valyala/fasthttp"
+	"strconv"
 )
 
 func main() {
@@ -20,10 +20,8 @@ func main() {
 
 func StartGame(ctx *fasthttp.RequestCtx) {
 	g := game.New()
-	persistence.PersistGame(g)
 	play(ctx, g)
 }
-
 
 func PlayGame(ctx *fasthttp.RequestCtx) {
 	g, err := persistence.LoadGame(ctx.UserValue("gameId"))
