@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"encoding/json"
 	"github.com/mrm1st3r/go-nim-kata/game"
+	"github.com/mrm1st3r/go-nim-kata/persistence"
 )
 
 func main() {
@@ -19,13 +20,13 @@ func main() {
 
 func StartGame(ctx *fasthttp.RequestCtx) {
 	g := game.New()
-	PersistGame(g)
+	persistence.PersistGame(g)
 	play(ctx, g)
 }
 
 
 func PlayGame(ctx *fasthttp.RequestCtx) {
-	g, err := LoadGame(ctx.UserValue("gameId"))
+	g, err := persistence.LoadGame(ctx.UserValue("gameId"))
 	if err != nil {
 		ctx.Error(err.Error(), 404)
 		return
@@ -46,15 +47,14 @@ func play(ctx *fasthttp.RequestCtx, g game.State) {
 		ctx.Error(err.Error(), 400)
 		return
 	}
-	PersistGame(g)
+	persistence.PersistGame(g)
 
-	//ctx.Redirect(fmt.Sprintf("/game/%s",g.ID), 302)
 	marshaledGame, _ := json.Marshal(g)
 	fmt.Fprintf(ctx, string(marshaledGame))
 }
 
 func GetGameState(ctx *fasthttp.RequestCtx) {
-	g, err := LoadGame(ctx.UserValue("gameId"))
+	g, err := persistence.LoadGame(ctx.UserValue("gameId"))
 
 	if err != nil {
 		ctx.Error(err.Error(), 404)
