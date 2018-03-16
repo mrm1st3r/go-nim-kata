@@ -19,7 +19,7 @@ func init() {
 	})
 }
 
-// PersistGame() persists a game to redis
+// PersistGame persists a game to redis
 func PersistGame(game game.State) {
 	gameMap := make(map[string]interface{})
 	gameMap["matchesLeft"] = game.MatchesLeft

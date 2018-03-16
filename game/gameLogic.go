@@ -16,7 +16,7 @@ type State struct {
 	Winner      string
 }
 
-// New() creates a new game with no winner and an initial amount of matches
+// New creates a new game with no winner and an initial amount of matches
 func New() State {
 	return State{
 		uuid.Must(uuid.NewV4()),
@@ -25,7 +25,7 @@ func New() State {
 	}
 }
 
-// Play() allows to a number of matches and let the computer play afterwards
+// Play allows to a number of matches and let the computer play afterwards
 func Play(game State, takeMatches int) (State, error) {
 	if takeMatches < minTakes || takeMatches > maxTakes || takeMatches > game.MatchesLeft {
 		return State{}, errors.New("invalid move")
