@@ -12,18 +12,18 @@ import (
 
 func main() {
 	router := fasthttprouter.New()
-	router.GET("/game/:gameId", GetGameState)
-	router.POST("/game", StartGame)
-	router.POST("/game/:gameId", PlayGame)
+	router.GET("/game/:gameId", getGameState)
+	router.POST("/game", startGame)
+	router.POST("/game/:gameId", playGame)
 	fasthttp.ListenAndServe(":8080", router.Handler)
 }
 
-func StartGame(ctx *fasthttp.RequestCtx) {
+func startGame(ctx *fasthttp.RequestCtx) {
 	g := game.New()
 	play(ctx, g)
 }
 
-func PlayGame(ctx *fasthttp.RequestCtx) {
+func playGame(ctx *fasthttp.RequestCtx) {
 	g, err := persistence.LoadGame(ctx.UserValue("gameId"))
 	if err != nil {
 		ctx.Error(err.Error(), 404)
@@ -51,7 +51,7 @@ func play(ctx *fasthttp.RequestCtx, g game.State) {
 	fmt.Fprintf(ctx, string(marshaledGame))
 }
 
-func GetGameState(ctx *fasthttp.RequestCtx) {
+func getGameState(ctx *fasthttp.RequestCtx) {
 	g, err := persistence.LoadGame(ctx.UserValue("gameId"))
 
 	if err != nil {

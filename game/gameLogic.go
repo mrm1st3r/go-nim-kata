@@ -9,12 +9,14 @@ const startingMatches = 13
 const minTakes = 1
 const maxTakes = 3
 
+// Represents the current state of a game
 type State struct {
 	ID          uuid.UUID
 	MatchesLeft int
 	Winner      string
 }
 
+// Create a new game with no winner and an initial amount of matches
 func New() State {
 	return State{
 		uuid.Must(uuid.NewV4()),
@@ -23,6 +25,7 @@ func New() State {
 	}
 }
 
+// Take a number of matches and let the computer play afterwards
 func Play(game State, takeMatches int) (State, error) {
 	if takeMatches < minTakes || takeMatches > maxTakes || takeMatches > game.MatchesLeft {
 		return State{}, errors.New("invalid move")
